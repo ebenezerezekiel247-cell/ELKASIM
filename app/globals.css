@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+  :focus-visible {
+    outline: 2px solid theme("colors.ink");
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Signature motif: echoes the diagonal cut in the ELK mark's "K" */
+  .clip-corner {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+  .clip-corner-sm {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .skeleton {
+    @apply relative overflow-hidden bg-bone;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shimmer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
